@@ -12,6 +12,7 @@ app.get("/", (req, res) => {
 });
 
 // Example endpoint for room creation
+
 app.post("/api/create-room", (req, res) => {
   const { secretKey } = req.body;
   if (secretKey === "admin123") {
@@ -19,6 +20,16 @@ app.post("/api/create-room", (req, res) => {
     res.json({ roomKey });
   } else {
     res.status(401).json({ error: "Invalid secret key" });
+  }
+});
+
+// Verify admin key endpoint
+app.post("/api/verify-admin", (req, res) => {
+  const { secretKey } = req.body;
+  if (secretKey === "admin123") {
+    res.json({ valid: true });
+  } else {
+    res.json({ valid: false });
   }
 });
 
